@@ -1,13 +1,11 @@
 #include <vector>
 #include <algorithm>
-#include <iostream>
-#define ll long long
-using namespace std;
+using ll = long long;
 
-void mergeSortedArrs(vector<int> &arr, int l1, int r1, int l2, int r2, ll &comparisons)
+void mergeSortedArrs(std::vector<int> &arr, int l1, int r1, int l2, int r2, ll &comparisons)
 {
-    vector<int> ans;
-    ans.reserve(l2 - r1 + 1);
+    std::vector<int> ans;
+    ans.reserve(r2 - l1 + 1);
 
     int i = l1, j = l2;
     while (i <= r1 && j <= r2)
@@ -38,33 +36,12 @@ void mergeSortedArrs(vector<int> &arr, int l1, int r1, int l2, int r2, ll &compa
         arr[idx] = ans[idx - l1];
 }
 
-void divide(vector<int> &arr, int l, int r, ll &comparisons)
+void mergeSort(std::vector<int> &arr, int l, int r, ll &comparisons)
 {
     if (l >= r)
         return;
     int m = (l + r) / 2;
-    divide(arr, l, m, comparisons);
-    divide(arr, m + 1, r, comparisons);
+    mergeSort(arr, l, m, comparisons);
+    mergeSort(arr, m + 1, r, comparisons);
     mergeSortedArrs(arr, l, m, m + 1, r, comparisons);
-}
-
-void mergeSort(vector<int> &arr, int l, int r, ll &comparisons)
-{
-    if (!arr.empty())
-        divide(arr, l, r, comparisons);
-}
-
-int main()
-{
-    vector<int> sample = {3, 6, 1, 7, 9, 8, 0, 2};
-    ll comparisons;
-
-    mergeSort(sample, 0, sample.size() - 1, comparisons);
-
-    for (int num : sample)
-        cout << num << " ";
-    cout << endl
-         << comparisons;
-
-    return 0;
 }

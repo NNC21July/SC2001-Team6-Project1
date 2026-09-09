@@ -1,10 +1,8 @@
 #include <vector>
 #include <algorithm>
-#include <iostream>
-#define ll long long
-using namespace std;
+using ll = long long;
 
-void insertionSort(vector<int> &arr, int l, int r, ll &comparisons)
+void insertionSort(std::vector<int> &arr, int l, int r, ll &comparisons)
 {
     for (int i = l + 1; i <= r; i++)
     {
@@ -12,24 +10,9 @@ void insertionSort(vector<int> &arr, int l, int r, ll &comparisons)
         {
             comparisons++;
             if (arr[j + 1] < arr[j])
-                swap(arr[j + 1], arr[j]);
+                std::swap(arr[j + 1], arr[j]);
             else
                 break;
         }
     }
-}
-
-int main()
-{
-    vector<int> sample = {3, 6, 1, 7, 9, 8, 0, 2};
-    ll comparisons;
-
-    insertionSort(sample, 0, sample.size() - 1, comparisons);
-
-    for (int num : sample)
-        cout << num << " ";
-    cout << endl
-         << comparisons;
-
-    return 0;
 }
